@@ -9,17 +9,13 @@ use App\Models\User;
 
 class LoginController extends Controller
 {
-    /**
-     * Muestra el formulario de login
-     */
+    // Muestra el formulario de inicio de sesión
     public function showForm()
     {
         return view('auth.login');
     }
 
-    /**
-     * Procesa el intento de login
-     */
+    // Maneja el inicio de sesión
     public function login(Request $request)
     {
         // Validamos los datos que envía el usuario
@@ -29,14 +25,16 @@ class LoginController extends Controller
         ]);
 
         // Intento de autenticación
-        if (Auth::attempt($request->only('email', 'password'), $request->filled('remember'))) {
+        $email = User::where('email', $request->email)->first();
+        $password = User::where('password', $request->name)->first();
 
-            return redirect()->intended('/');
+        if ($email || $password) {
+            return view('home');
         }
 
         // Si falla la autenticación
         return back()->withErrors([
-            'email' => 'Las credenciales no coinciden con nuestros registros.',
-        ])->onlyInput('email');
+            'credentials_error' => 'El correo electrónico o la contraseña son incorrectos.',
+        ]);
     }
 }

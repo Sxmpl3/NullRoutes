@@ -8,7 +8,7 @@ use App\Models\User;
 
 class RegisterController extends Controller
 {   
-    // Muestra el formulario en caso de no estar autenticado
+    // Muestra el formulario de registro
     public function showForm()
     {
         return view('auth.register');
@@ -16,31 +16,26 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        // Validamos los datos que envia el usuario
+        // Validación de datos
         $request->validate([
             'name' => 'required|string|max:255',
             'apellidos' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'username' => 'required|string|max:255|unique:users', // Validación de username
+            'email' => 'required|string|email|max:255|unique:users', // Validación de email
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-        // Creamos el usuario en la base de datos
-        $exist_email = User::where('email', $request->email)->first();
-        $exist_user = User::where('user', $request->name)->first();
-        if (!$exist_email || !$exist_user) {
-            return back()->with('toast', 'Ese usuario o correo ya esta registraado.');
-        }
+        // Creación del usuario
         $user = User::create([
             'name' => $request->name,
             'apellidos' => $request->apellidos,
+            'username' => $request->username,
             'email' => $request->email,
-            'password' => bcrypt($request->password), // Encriptación a base64
+            'password' => bcrypt($request->password),
         ]);
 
-        // Autenticamos al usuario
+        // Autenticación y redirección
         auth()->login($user);
-
-        // Redirigimos al usuario a la pagina de inicio
-        return redirect()->intended('/');
+        return redirect()->route('foro')->with('success', '¡Registro exitoso!');
     }
 }
