@@ -25,6 +25,11 @@ class RegisterController extends Controller
         ]);
 
         // Creamos el usuario en la base de datos
+        $exist_email = User::where('email', $request->email)->first();
+        $exist_user = User::where('user', $request->name)->first();
+        if (!$exist_email || !$exist_user) {
+            return back()->with('toast', 'Ese usuario o correo ya esta registraado.');
+        }
         $user = User::create([
             'name' => $request->name,
             'apellidos' => $request->apellidos,
