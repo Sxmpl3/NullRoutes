@@ -37,6 +37,6 @@ class RegisterController extends Controller
 
         // Autenticación y redirección
         auth()->login($user);
-        return redirect()->route('foro')->with('success', '¡Registro exitoso!');
+        return redirect()->route('profile.me')->with('success', '¡Registro exitoso!');
     }
 }
