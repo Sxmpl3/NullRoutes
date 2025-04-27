@@ -1,10 +1,8 @@
-@extends('layouts.general')
+@extends('layouts.app')
 
 @section('content')
 <div class="max-w-4xl mx-auto p-6">
-    <h1 class="text-3xl font-bold text-white mb-8 text-center">Perfil de Usuario</h1>
-
-    <div class="bg-gray-800 p-8 rounded-2xl shadow-lg flex flex-col items-center">
+    <div class="bg-gray-800 p-8 rounded-2xl shadow-lg flex flex-col items-center mt-10">
         <!-- Imagen de perfil -->
         <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-blue-500 mb-6">
             @if($user->profile_photo && file_exists(public_path('storage/profile_photos/' . $user->profile_photo)))

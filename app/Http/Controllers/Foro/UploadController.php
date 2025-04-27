@@ -20,15 +20,16 @@ class UploadController extends Controller
             'content' => 'required|string',
         ]);
 
-        $hoy = Carbon::now()->format('d/m/Y');
+        $hoy = Carbon::now();
 
-        Forro::create([
+        Foro::create([
             'user_id' => auth()->id(),
             'nombre_post' => $request->input('title'),
             'contenido_post' => $request->input('content'),
             'created_at' => $hoy,
+            'updated_at' => $hoy,
         ]);
         
-        return redirect()->route('foro.index')->with('success', 'Post uploaded successfully!');
+        return redirect()->route('profile.me')->with('success', 'Post uploaded successfully!');
     }
 }

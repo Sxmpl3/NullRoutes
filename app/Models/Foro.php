@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PostsForo extends Model
+class Foro extends Model
 {
     protected $table = 'posts_foro';
 
@@ -14,6 +14,7 @@ class PostsForo extends Model
         'nombre_post',
         'contenido_post',
         'created_at',
+        'updated_at',
     ];
 
     public function foro()

@@ -47,8 +47,8 @@
 
         <!-- NAVIGATION -->
         <nav class="flex items-center space-x-8 text-base font-medium">
-            <a href="/" class="hover:text-blue-400 transition">Inicio</a>
-            <a href="/profile" class="hover:text-blue-400 transition">Perfil</a>
+            <a href="{{ route('index') }}" class="hover:text-blue-400 transition">Inicio</a>
+            <a href="{{ route('profile.me') }}" class="hover:text-blue-400 transition">Perfil</a>
             <form method="POST" action="/logout" class="inline">
                 @csrf
                 <button type="submit" class="hover:text-red-400 transition">Cerrar sesión</button>

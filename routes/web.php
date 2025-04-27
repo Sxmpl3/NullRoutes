@@ -5,11 +5,14 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Foro\UploadController;
+use App\Http\Controllers\Foro\ForoController;
+
+
 
 // Rutas para invitados (no autenticados)
 Route::middleware('guest')->group(function () {
     Route::get('/', function () {
-        return view('home.home');
+        return view('home');
     })->name('home');
 
     // Registro
@@ -24,13 +27,13 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     // Foro
     Route::get('/foro/upload', [UploadController::class, 'show'])->name('upload.show');
+    Route::get('/', [ForoController::class, 'show'])->name('index');
 
     Route::post('/foro/upload', [UploadController::class, 'uploadPost'])->name('upload.post');
 
     // Profile
     Route::get('/profile/me', [ProfileController::class, 'show'])->name('profile.me');
     Route::get('/profile/{user}', [ProfileController::class, 'showUser'])->name('profile.user');
-
 });
 
 

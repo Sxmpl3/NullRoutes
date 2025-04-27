@@ -26,7 +26,7 @@ class LoginController extends Controller
         // Intentar autenticar al usuario
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate(); // Previene ataques de sesión
-            return redirect()->route('profile.me');
+            return redirect()->route('index')->with('success', '¡Bienvenido de nuevo!');
         }
 
         // Si falla la autenticación

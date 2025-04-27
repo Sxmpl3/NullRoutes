@@ -1,6 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
+
 <div class="text-center">
     <img src="{{ asset('images/logoblanco.webp') }}"
         alt="NullRoutes Logo"
