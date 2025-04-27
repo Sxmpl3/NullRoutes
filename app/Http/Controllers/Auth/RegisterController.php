@@ -32,6 +32,7 @@ class RegisterController extends Controller
             'username' => $request->username,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+            'rol' => 0,
         ]);
 
         // Autenticación y redirección

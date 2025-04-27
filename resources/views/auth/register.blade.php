@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
 <div class="max-w-md mx-auto">
@@ -39,9 +39,9 @@
         </button>
     </form>
 
-    <div class="mt-6 text-center">
-        <a href="{{ route('login') }}" class="text-sm text-blue-400 hover:text-blue-300">
-            ¿Ya tienes una cuenta? Inicia sesión
-        </a>
+    <div>
+        <p class="mt-4 text-center text-gray-400">
+            ¿Ya tienes una cuenta? <a href="{{ route('login') }}" class="text-blue-500 hover:underline">Inicia sesión</a>
+        </p>
     </div>
 @endsection
