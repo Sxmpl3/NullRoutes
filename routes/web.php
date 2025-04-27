@@ -4,13 +4,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Profile\ProfileController;
-
-
+use App\Http\Controllers\Foro\UploadController;
 
 // Rutas para invitados (no autenticados)
 Route::middleware('guest')->group(function () {
+    Route::get('/', function () {
+        return view('home.home');
+    })->name('home');
+
     // Registro
-    Route::get('/register', [RegisterController::class, 'showForm'])->name('register.form');
+    Route::get('/register', [RegisterController::class, 'show'])->name('register.form');
     Route::post('/register', [RegisterController::class, 'register'])->name('register');
     
     // Login
@@ -19,8 +22,15 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    // Foro
+    Route::get('/foro/upload', [UploadController::class, 'show'])->name('upload.show');
+
+    Route::post('/foro/upload', [UploadController::class, 'uploadPost'])->name('upload.post');
+
+    // Profile
     Route::get('/profile/me', [ProfileController::class, 'show'])->name('profile.me');
     Route::get('/profile/{user}', [ProfileController::class, 'showUser'])->name('profile.user');
+
 });
 
 
